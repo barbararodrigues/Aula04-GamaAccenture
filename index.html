@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio04 - Javascript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/1d5443cb1e.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+  
+
+    <script>
+        const app = document.querySelector("#app");
+            app.innerHTML = `
+        <div class="container">
+        <h2 class="text-center">FORMULÁRIO </h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                
+                    <input type="text" class="form-control"  placeholder="Nome" id="name">
+                </div>
+                <div class="mb-3">
+
+                    <input type="email" class="form-control" placeholder="Email" id="email">
+                </div>
+                <div class="mb-3">
+                
+                    <input type="number" class="form-control" placeholder="Idade" id="age">
+                </div>
+            
+                <div class="mb-3">
+                 
+                    <input type="tel" class="form-control" placeholder="Telefone" id="phone">
+                </div>
+                <div class="mb-3">
+           
+                    <input type="text" class="form-control" placeholder="Estado Civil" id="statemarital">
+                </div>
+                <div class="mb-3">
+           
+                    <input type="text" class="form-control" placeholder="Cidade" id="city">
+                </div>
+                <div class="mb-3">
+             
+                    <input type="text" class="form-control" placeholder="Estado" id="state">
+                </div>
+
+                <button type="submit" onclick="Click()" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </div>
+    </br>
+    <div id="load"> </div>
+    <div id="root"> </div>`;
+  
+
+    function LoadContent() {
+        this.load.innerHTML = `<div class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            </div>`;
+      }
+
+
+      function SecondScreen(message) {
+          const firstName = this.userName.split(' ');
+        this.root.innerHTML = `
+            <div class="container text-center">
+                <div class="card">  
+                    <div> <h5> Olá, ${firstName[0]}! ${message} </h5>
+                        <div>
+                    <h5 class="card-title">Dados</h5>
+                    <div class="card-body">
+                        
+                        <p> Nome: 
+                            ${this.userName}
+                            
+                        </p>                     
+                        <p> Email: 
+                            ${this.userEmail}
+                            
+                        </p>
+                        <p> Idade: 
+                            ${this.userAge}
+                            
+                        </p>
+                        <p> Telefone: 
+                            ${this.userPhone}
+                            
+                        </p>
+                        <p> Estado Civil: 
+                            ${this.userStateMarital}
+                            
+                        </p>
+                        <p> Cidade: 
+                            ${this.userCity}
+                            
+                        </p>
+                        <p> Estado: 
+                            ${this.userState}
+                            
+                        </p>
+                    </div>
+                        
+                </div>
+            </div>
+             `;
+      }
+
+        
+        function Click() {
+            this.userName = this.document.getElementById('name').value;
+            this.userEmail= this.document.getElementById('email').value;
+            this.userAge = this.document.getElementById('age').value;
+            this.userPhone = this.document.getElementById('phone').value;
+            this.userStateMarital = this.document.getElementById('statemarital').value;
+            this.userCity = this.document.getElementById('city').value;
+            this.userState = this.document.getElementById('state').value;
+            this.load = document.querySelector("#load");
+            this.root = document.querySelector("#root");
+
+
+            LoadContent();
+
+           
+
+            const URL = 'https://webhook.site/a004ba84-e5d6-4971-8757-65cc060c38bd';
+            const Body = {
+                userName: this.userName,
+                userEmail: this.userEmail,
+                userAge: this.userAge,
+                userPhone: this.userPhone,
+                userStateMarital: this.userStateMarital,
+                userState: this.userState,
+                userCity: this.userCity
+
+            }
+
+            axios.post(URL, Body).then(
+                res => {
+
+                    this.load.innerHTML = '';
+                    let message = res.data.message;
+                    console.log('Retorno de dados', res.data.message);
+                    console.log('Retorno de dados', res.status);
+                    SecondScreen( message);
+                }
+            )
+
+            // setTimeout(() => {
+               
+            // }, 1500);
+            
+        }
+    </script>
+</body>
+
+</html>
