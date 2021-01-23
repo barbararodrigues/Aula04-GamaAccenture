@@ -76,99 +76,96 @@
     <div id="root"> </div>`;
   
 
-    function LoadContent() {
-        this.load.innerHTML = `<div class="text-center">
+
+        
+
+
+        
+        function Click() {
+            let userName = document.getElementById('name').value;
+            let userEmail= document.getElementById('email').value;
+            let userAge = document.getElementById('age').value;
+            let userPhone = document.getElementById('phone').value;
+            let userStateMarital = document.getElementById('statemarital').value;
+            let userCity = document.getElementById('city').value;
+            let userState = document.getElementById('state').value;
+            let load = document.querySelector("#load");
+            let root = document.querySelector("#root");
+
+
+            load.innerHTML = `<div class="text-center">
                             <div class="spinner-border" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                             </div>`;
-      }
+            
 
-
-      function SecondScreen(message) {
-          const firstName = this.userName.split(' ');
-        this.root.innerHTML = `
-            <div class="container text-center">
-                <div class="card">  
-                    <div> <h5> Olá, ${firstName[0]}! ${message} </h5>
-                        <div>
-                    <h5 class="card-title">Dados</h5>
-                    <div class="card-body">
-                        
-                        <p> Nome: 
-                            ${this.userName}
-                            
-                        </p>                     
-                        <p> Email: 
-                            ${this.userEmail}
-                            
-                        </p>
-                        <p> Idade: 
-                            ${this.userAge}
-                            
-                        </p>
-                        <p> Telefone: 
-                            ${this.userPhone}
-                            
-                        </p>
-                        <p> Estado Civil: 
-                            ${this.userStateMarital}
-                            
-                        </p>
-                        <p> Cidade: 
-                            ${this.userCity}
-                            
-                        </p>
-                        <p> Estado: 
-                            ${this.userState}
-                            
-                        </p>
-                    </div>
-                        
-                </div>
-            </div>
-             `;
-      }
-
-        
-        function Click() {
-            this.userName = this.document.getElementById('name').value;
-            this.userEmail= this.document.getElementById('email').value;
-            this.userAge = this.document.getElementById('age').value;
-            this.userPhone = this.document.getElementById('phone').value;
-            this.userStateMarital = this.document.getElementById('statemarital').value;
-            this.userCity = this.document.getElementById('city').value;
-            this.userState = this.document.getElementById('state').value;
-            this.load = document.querySelector("#load");
-            this.root = document.querySelector("#root");
-
-
-            LoadContent();
 
            
 
             const URL = 'https://webhook.site/a004ba84-e5d6-4971-8757-65cc060c38bd';
             const Body = {
-                userName: this.userName,
-                userEmail: this.userEmail,
-                userAge: this.userAge,
-                userPhone: this.userPhone,
-                userStateMarital: this.userStateMarital,
-                userState: this.userState,
-                userCity: this.userCity
+                userName: userName,
+                userEmail: userEmail,
+                userAge: userAge,
+                userPhone: userPhone,
+                userStateMarital: userStateMarital,
+                userState: userState,
+                userCity: userCity
 
             }
 
             axios.post(URL, Body).then(
                 res => {
 
-                    this.load.innerHTML = '';
+                    load.innerHTML = '';
                     let message = res.data.message;
                     console.log('Retorno de dados', res.data.message);
                     console.log('Retorno de dados', res.status);
-                    SecondScreen( message);
-                }
-            )
+                    const firstName = userName.split(' ');
+                    root.innerHTML = `
+                    <div class="container text-center">
+                        <div class="card">  
+                            <div> <h5> Olá, ${firstName[0]}! ${message} </h5>
+                                <div>
+                            <h5 class="card-title">Dados</h5>
+                            <div class="card-body">
+                                
+                                <p> Nome: 
+                                    ${userName}
+                                    
+                                </p>                     
+                                <p> Email: 
+                                    ${userEmail}
+                                    
+                                </p>
+                                <p> Idade: 
+                                    ${userAge}
+                                    
+                                </p>
+                                <p> Telefone: 
+                                    ${userPhone}
+                                    
+                                </p>
+                                <p> Estado Civil: 
+                                    ${userStateMarital}
+                                    
+                                </p>
+                                <p> Cidade: 
+                                    ${userCity}
+                                    
+                                </p>
+                                <p> Estado: 
+                                    ${userState}
+                                    
+                                </p>
+                            </div>
+                                
+                        </div>
+                    </div>
+                    `;
+                        }
+            );
 
             // setTimeout(() => {
                
